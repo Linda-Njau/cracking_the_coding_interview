@@ -1,6 +1,6 @@
 def test_is_permutation():
-    str_a ="abcd"
-    str_b = "cdab"
+    str_a ="baaa"
+    str_b = "aaab"
 
     result = is_permutation_hash_table(str_a, str_b)
     print(result)

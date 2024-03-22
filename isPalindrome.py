@@ -23,3 +23,25 @@ def is_equal(one, two):
         one = one.next
         two = two.next
     return one is None and two is None
+
+def isPalindromeStack(head):
+    fast = slow = head
+    stack = []
+    
+    while fast and fast.next:
+        stack.append(slow.data)
+        slow = slow.next
+        fast = fast.next.next
+        
+    if fast:
+        slow = slow.next
+        
+    while slow:
+        top = stack.pop()
+        
+        if top != slow.data:
+            return False
+        
+        slow = slow.next
+    
+    return True

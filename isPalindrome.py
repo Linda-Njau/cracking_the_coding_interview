@@ -45,3 +45,18 @@ def isPalindromeStack(head):
         slow = slow.next
     
     return True
+
+class Result:
+    def __init__(self, node, result):
+        self.node = node
+        self.result = result
+        
+def isPalindromeRecurse(head):
+    length = length_of_list(head)
+    p = is_palindrome_recurse(head, length)
+    return p.result
+
+def is_palindrome_recurse(head, length):
+    if head is None or length <= 0:
+        return Result(head, True)
+     

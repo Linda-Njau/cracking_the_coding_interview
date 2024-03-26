@@ -1,3 +1,6 @@
+from unittest import result
+
+
 class ListNode:
     def __init__(self, data=0, next=None):
         self.data = data
@@ -59,4 +62,20 @@ def isPalindromeRecurse(head):
 def is_palindrome_recurse(head, length):
     if head is None or length <= 0:
         return Result(head, True)
-     
+    elif length == 1:
+        return Result(head.next, True)
+    
+    res = is_palindrome_recurse(head.next, length -2)
+    if not res.result or res.node is None:
+        return res
+    res. result = head.data == res.node.data
+    res.node = res.node.next
+    
+    return res
+
+def length_of_list(n):
+    size = 0
+    while n is not None:
+        size += 1
+        n = n.next
+    return size

@@ -25,7 +25,27 @@ class SetOfStacks:
         if last.size == 0:
             self.stacks.pop()
         return v
-
+    
+    def is_empty(self):
+        last = self.get_last_stack()
+        return not last or last.is_empty()
+    
+    def pop_at(self, index):
+        return self.left_shift(index, True)
+    
+    def left_shift(self, index, remove_top):
+        stack = self.stacks[index]
+        if remove_top:
+            removed_item = stack.pop()
+        else:
+            removed_item = stack.remove_bottom()
+            
+        if stack.is_empty():
+            self.stacks.pop(index)
+        elif len(self.stacks) > index + 1:
+            v = self.left_shift(index + 1, False)
+            stack.push(v)
+        return removed_item
 class EmptyStackException(Exception):
     pass
 

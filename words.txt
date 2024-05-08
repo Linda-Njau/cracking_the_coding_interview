@@ -1,5 +1,1 @@
-
-sq: RV128 only
-lr (? Figure A.13)
-
-jalr: broken
+This is a dog

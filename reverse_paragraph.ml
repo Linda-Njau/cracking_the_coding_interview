@@ -1,24 +1,23 @@
+let rec reverse_word word =
+  let cleaned_word = 
+    String.concat "" (List.filter_map (fun c ->
+      if (Char.code c) >= 32 && (Char.code c) <= 126 && (Char.code c) != 13 then Some (String.make 1 c)
+      else None) (String.to_seq word |> List.of_seq))
+  in
+  let len = String.length cleaned_word in
+  let result = Bytes.create len in
+  for i = 0 to len - 1 do
+    Bytes.set result i cleaned_word.[len - 1 - i]
+  done;
+  Bytes.to_string result
 
-let rec reverse_string s =
+let reverse_line s =
   let words = String.split_on_char ' ' s in
-  List.iter (fun word -> print_endline ("Original word: " ^ word)) words;  (* Print original words *)
-  let reversed_words = List.map (fun word ->
-    let pattern = Str.regexp "[^a-zA-Z0-9\\p{Punct}]" in
-    let cleaned_word = Str.global_replace pattern "" word in
-      let len = String.length cleaned_word in
-      let result = Bytes.create len in
-      for i = 0 to len - 1 do
-        Bytes.set result i cleaned_word.[len - 1 - i];
-        print_endline ("Reversing character: " ^ String.make 1 word.[len - 1 - i]);  (* Print reversed character *)
-        done;
-      Bytes.to_string result
-  ) words in
-  List.iter (fun word -> print_endline ("Reversed word: " ^ word)) reversed_words;  (* Print reversed words *)
+  let reversed_words = List.map reverse_word words in
   String.concat " " reversed_words
 
-
-let reverse_lines lines =
-  List.map reverse_string lines
+let reverse_multiple_lines lines =
+  List.map reverse_line lines
 
 let read_input ?(file_path="") () =
   let read_from_terminal () =
@@ -52,8 +51,8 @@ let process_input ?file_path () =
     | Some path -> read_input ~file_path:path ()
     | None -> read_input ()
   in
-  let reversed_lines = reverse_lines input_lines in
-  List.iter (fun line -> print_endline line) reversed_lines
+  let reversed_lines = reverse_multiple_lines input_lines in
+  List.iter print_endline reversed_lines
 
 let () =
   if Array.length Sys.argv > 1 then (

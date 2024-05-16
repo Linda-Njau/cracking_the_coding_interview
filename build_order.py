@@ -2,7 +2,7 @@ from collections import defaultdict
 
 class Graph:
     def __init__(self):
-        self.nodes - []
+        self.nodes = []
         
     def get_or_create_node(self, name):
         node = next((n for n in self.nodes if n.name == name), None)

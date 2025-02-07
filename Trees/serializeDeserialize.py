@@ -1,3 +1,7 @@
+class TreeNode(object):
+     def __init__(self, x):
+         self.left = None
+         self.right = None
 class Codec:
     def serialize(self, root):
         parts = []
@@ -19,7 +23,7 @@ class Codec:
                 return None
             val = treelist[self.index]
             self.index += 1
-            if val is "null":
+            if val == "null":
                 return None
             node = TreeNode(int(val))
             node.left = rec()
